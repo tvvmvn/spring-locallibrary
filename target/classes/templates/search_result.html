@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Local-Library</title>
+  
+  <style>
+    /* 글로벌 미니멀 시스템 디자인 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #2D3748;      /* 눈이 편안한 다크 그레이 */
+      background: #F7FAFC; /* 따뜻함이 감도는 미니멀 화이트 백그라운드 */
+      line-height: 1.6;
+      padding: 0 0 100px 0;
+    }
+
+    a {
+      color: #4A5568;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #1A202C;
+      text-decoration: underline;
+    }
+
+    /* 🏛️ 상단 일체형 헤더 & 네비게이션 영역 */
+    header {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 20px 0;
+      margin-bottom: 40px;
+    }
+
+    nav {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #718096;
+    }
+
+    nav ul li:first-child a {
+      font-weight: 700;
+      color: #1A202C;
+    }
+
+    /* 메인 콘텐츠 레이아웃 콘테이너 */
+    .main-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: #1A202C;
+      margin-bottom: 8px;
+    }
+
+    /* 카운트 정보 텍스트 */
+    .count-text {
+      font-size: 0.95rem;
+      color: #718096;
+      margin-bottom: 16px;
+    }
+
+    .count-text span {
+      font-weight: 700;
+      color: #1A202C;
+    }
+
+    /* 도서 리스트 박스 */
+    ul.book-list {
+      list-style: none;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    ul.book-list li:last-child {
+      border-bottom: none;
+    }
+
+    ul.book-list li {
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    ul.book-list li a {
+      display: block;
+      padding: 12px;
+      color: #2D3748;
+      transition: background 0.2s ease;
+    }
+
+    small {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">홈</a></li>
+        <li>연락하기</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="main-container">
+    <div class="before-search-zone">
+      <p class="count-text">
+        "<span th:text="${keyword}"></span>"에 대해
+        총 <span th:text="${result.resultCount}">0</span>개의 검색결과가 있습니다.
+      </p>
+      
+      <ul class="book-list">
+        <li th:each="book : ${result.resultBooks}">
+          <a th:href="${book.url}">
+            <h3 th:text="${book.title}"></h3> 
+            <p th:text="${book.authorName}"></p>
+            <small>
+              <span th:text="${book.instanceCount}"></span>개 있음
+            </small>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

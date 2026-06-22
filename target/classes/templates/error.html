@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Error - Local-Library</title>
+  
+  <style>
+    /* 글로벌 미니멀 시스템 디자인 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #2D3748;      /* 다크 그레이 */
+      background: #F7FAFC; /* 미니멀 화이트 배경 */
+      line-height: 1.7;
+      padding: 0 0 100px 0;
+    }
+
+    a {
+      color: #4A5568;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: #1A202C;
+      text-decoration: underline;
+    }
+
+    /* 🏛️ 상단 일체형 헤더 & 네비게이션 영역 */
+    header {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 20px 0;
+      margin-bottom: 80px; /* 에러 메시지에 집중하도록 여백 극대화 */
+    }
+
+    nav {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #718096;
+    }
+
+    nav ul li a {
+      color: #718096;
+    }
+    
+    nav ul li a:hover {
+      color: #1A202C;
+      text-decoration: none;
+    }
+
+    /* 메인 콘텐츠 레이아웃 콘테이너 */
+    .error-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center; /* 에러 화면은 중앙 정렬이 국룰 */
+    }
+
+    /* 🚨 에러 코드 (404, 500 등) 디자인 */
+    .error-code {
+      font-size: 6rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: #E53E3E; /* 경고의 의미를 담은 칠리 레드 */
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    /* 에러 핵심 안내 메시지 */
+    .error-message {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2D3748;
+      margin-bottom: 32px;
+    }
+
+    /* 📊 개발자용 디버깅 디테일 목록 박스 */
+    .debug-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      text-align: left; /* 디버깅 코드는 왼쪽 정렬 */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .debug-box h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #A0AEC0;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #F7FAFC;
+      padding-bottom: 4px;
+    }
+
+    .debug-box ul {
+      list-style: none;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace; /* 코드 전용 폰트 */
+      font-size: 0.9rem;
+      color: #4A5568;
+    }
+
+    .debug-box ul li {
+      margin-bottom: 6px;
+      word-break: break-all;
+    }
+    
+    .debug-box ul li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 🔄 홈으로 복귀 버튼 스타일 마감 */
+    .home-btn-wrapper {
+      margin-top: 24px;
+    }
+
+    .home-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #2D3748;
+      color: #FFFFFF;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .home-btn:hover {
+      background: #1A202C;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="error-container">
+
+    <h1 class="error-code" th:text="${status}">500</h1>
+
+    <p class="error-message" th:text="${message}">Something went wrong on our end.</p>
+
+    <div class="debug-box">
+      <h4>System Error Log</h4>
+      <ul>
+        <li>• Status: <span th:text="${status}">Unknown</span></li>
+        <li>• Error: <span th:text="${error}">Internal Server Error</span></li>
+        <li>• Message: <span th:text="${message}">No message available</span></li>
+      </ul>
+    </div>
+
+    <div class="home-btn-wrapper">
+      <a href="/" class="home-btn">Back to home</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

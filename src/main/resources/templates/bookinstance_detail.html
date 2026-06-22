@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Copy Details - Local-Library</title>
+  
+  <style>
+    /* 글로벌 미니멀 시스템 디자인 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #2D3748;      /* 다크 그레이 */
+      background: #F7FAFC; /* 미니멀 화이트 배경 */
+      line-height: 1.7;
+      padding: 0 0 100px 0;
+    }
+
+    a {
+      color: #4A5568;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: #1A202C;
+      text-decoration: underline;
+    }
+
+    /* 🏛️ 상단 일체형 헤더 & 네비게이션 영역 */
+    header {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 20px 0;
+      margin-bottom: 50px;
+    }
+
+    nav {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #718096;
+    }
+
+    nav ul li a {
+      color: #718096;
+    }
+    
+    nav ul li a:hover {
+      color: #1A202C;
+      text-decoration: none;
+    }
+
+    /* 메인 콘텐츠 레이아웃 콘테이너 */
+    .detail-container {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 📘 바코드/실물 책 고유 타이틀 디자인 */
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #1A202C;
+      margin-bottom: 40px;
+      line-height: 1.3;
+    }
+
+    /* 🧱 구조적 단락 구별을 위한 섹션 스타일 */
+    section {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 24px 30px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #A0AEC0; /* 은은한 폰트 컬러로 기획서 느낌 강조 */
+      margin-bottom: 12px;
+      border-bottom: 1px solid #F7FAFC;
+      padding-bottom: 6px;
+    }
+
+    section p {
+      font-size: 1.05rem;
+      color: #2D3748;
+      font-weight: 500;
+    }
+
+    /* 🚨 특별 관리: 반납 예정일(Due Back) 강조 스타일 */
+    .due-back-section {
+      border-left: 4px solid #E53E3E; /* 경고 의미의 차분한 레드 포인트 라인 */
+    }
+
+    .due-back-date {
+      color: #E53E3E;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">홈</a></li>
+        <li>연락하기</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="detail-container">
+
+    <h1 th:text="${bookInstance.title}">Book Instance Title / ID</h1>
+
+    <section>
+      <h3>출판사</h3>
+      <p th:text="${bookInstance.imprint}">Publisher information, Year...</p>
+    </section>
+
+    <section>
+      <h3>도서 상태</h3>
+      <p th:text="${bookInstance.status.getLabel()}">
+        Available / Loaned / Maintenance
+      </p>
+    </section>
+
+    <section 
+      class="due-back-section" 
+      th:if="${bookInstance.status.name == T(com.example.locallibrary.enums.Status).LOANED.name}"
+    >
+      <h3>반납일자</h3>
+      <p class="due-back-date" th:text="${bookInstance.dueBack}">YYYY-MM-DD</p>
+    </section>
+  </div>
+
+</body>
+</html>
