@@ -1,12 +1,11 @@
 package com.example.locallibrary.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 // 데이터베이스의 각 테이블과 대응되는 객체 (도메인)
 @Entity
@@ -23,10 +22,8 @@ public class Author {
 
   // LocalDate: 날짜 객체. 연-월-일 순으로 데이터를 저장합니다.
   // 데이터베이스의 DATE 자료형에 대응합니다.
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate birthDate;
 
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate deathDate;
 
   // 

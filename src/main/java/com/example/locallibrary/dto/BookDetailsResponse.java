@@ -2,6 +2,7 @@ package com.example.locallibrary.dto;
 
 import java.util.List;
 
+// 책 상세페이지 DTO
 public class BookDetailsResponse {
 
   private String title;
@@ -9,8 +10,10 @@ public class BookDetailsResponse {
   private String authorName;
   private String authorUrl;
   private String isbn;
+  // 이 책의 장르들
   private List<String> genres;
   private Long bookInstanceCount;
+  // 책에 딸린 사본들 (내부 클래스)
   private List<InstanceOfBookListResponse> bookInstances;
 
   //

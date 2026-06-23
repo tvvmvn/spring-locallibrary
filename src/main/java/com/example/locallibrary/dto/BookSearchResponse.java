@@ -2,9 +2,12 @@ package com.example.locallibrary.dto;
 
 import java.util.List;
 
+// 책 검색결과 DTO
 public class BookSearchResponse {
 
+  // 검색 결과 개수
   private Long resultCount;
+  // 검색된 책들 (내부 클래스)
   private List<ResultBook> resultBooks;
 
   //
@@ -31,7 +34,9 @@ public class BookSearchResponse {
 
     private String title;
     private String authorName;
+    // 책의 사본 수 (재고수량)
     private Long instanceCount;
+    // 책 상세 페이지로 연결하는 주소
     private String url;
 
     //

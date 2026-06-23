@@ -19,9 +19,6 @@ public class AuthorController {
   }
 
   @GetMapping("/author/{id}")
-  // @PathVariable: 경로 변수를 지정하는 어노테이션
-  // URL(요청 주소)로 서버에 간단한 데이터를 전송하는 방식입니다. (요청 매개변수처럼)
-  // 요청주소에서 이 자리({})에 있는 값을 경로변수 id로 인식하겠다
   public String getOne(@PathVariable("id") Long id, Model model) {
 
     Author author = authorRepository.findById(id)

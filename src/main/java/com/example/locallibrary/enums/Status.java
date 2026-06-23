@@ -1,5 +1,6 @@
 package com.example.locallibrary.enums;
 
+// 도서 사본의 상태를 나타내는 이넘
 public enum Status {
   
   // 괄호 안에 전달된 값이 각 상수의 라벨에 할당됩니다.

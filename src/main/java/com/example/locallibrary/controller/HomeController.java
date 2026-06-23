@@ -44,11 +44,12 @@ public class HomeController {
 
   @GetMapping("/search")
   public String search(
-    // @RequestParam: 요청 매개변수. 
     // keyword는 사용자가 입력한 검색어입니다.
+    // @RequestParam: 요청 매개변수. 
     // 형태: 주소?keyword=값
     @RequestParam(name = "keyword") String keyword, Model model) {
       
+    // 검색어를 포함하는 책들을 DB에서 가져옵니다.
     List<ResultBook> resultBooks = bookRepository.findByTitleContainingIgnoreCase(keyword).stream()
       .map(book -> {
         ResultBook dto = new ResultBook();
@@ -59,8 +60,8 @@ public class HomeController {
         return dto;
       }).collect(Collectors.toList());
 
+    // 검색결과 DTO
     BookSearchResponse dto = new BookSearchResponse();
-
     dto.setResultBooks(resultBooks);
     dto.setResultCount(bookRepository.countByTitleContainingIgnoreCase(keyword));
     

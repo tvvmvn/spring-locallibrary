@@ -12,10 +12,12 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Book {
 
-  @Id
+  @Id// 이 필드를 기본키로 설정합니다
+  // 기본키의 생성 방식(Generation type)을 AUTO_INCREMENT로 설정합니다.
   @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private long id;
+  private Long id;
   
+  // 책 제목
   private String title;
 
   // 최대 1000 글자로 설정합니다. varchar(1000)
@@ -23,11 +25,11 @@ public class Book {
   private String summary;
 
   // 다대일(N:1) - 여러개의 책이 한명의 저자에게 속한다
-  // 테이블에서 저자의 아이디(author_id)를 외래키로 저장합니다.
+  // 테이블에서 저자의 아이디(author_id)를 외래키로 지정합니다.
   // FetchType: EAGER, LAZY 두가지가 있습니다.
   // EAGER(즉시 가져오기): 연관된 엔티티를 항상 함께 조회합니다. (성능 이슈있음)
-  // LAZY(미루기): 연관된 엔티티를 필요한 순간(Getter로 호출)등까지 조회를 미룹니다. 성능을 위해 추천되는 방식. 
-  // 예) Book 리포지토리에서 Long count() 메서드가 내부적으로 저자 조회를 하지 않을 수 있음
+  // LAZY(미루기): 연관된 엔티티를 필요한 순간(조인 요청)등까지 조회를 미룹니다. 성능을 위해 추천되는 방식. 
+  // 예) Book 테이블에서 집계함수 COUNT(*)를 활용할 때 내부적으로 저자 조회를 할 필요가 없음
   @ManyToOne(fetch = FetchType.LAZY) 
   @JoinColumn(name = "author_id")     
   private Author author;

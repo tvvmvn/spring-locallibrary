@@ -20,6 +20,7 @@ public class BookInstanceController {
   }
 
   @GetMapping("/bookinstance/{id}")
+  // id: 사용자가 요청한 책의 사본ID
   public String getOne(@PathVariable("id") Long id, Model model) {
     
     BookInstance bookInstance = bookInstanceRepository.findById(id)

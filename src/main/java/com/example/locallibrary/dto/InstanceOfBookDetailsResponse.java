@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.example.locallibrary.enums.Status;
 
+// 책 사본 상세페이지 DTO
 public class InstanceOfBookDetailsResponse {
 
   private String title;
